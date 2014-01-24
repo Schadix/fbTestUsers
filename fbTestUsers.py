@@ -30,11 +30,15 @@ def createUser(fullName, permissions):
     # &permissions=read_stream
     # &method=post
     # &access_token=APP_ACCESS_TOKEN
-    urllib.urlencode({'installed':'true',
+    post_args = urllib.urlencode({'installed':'true',
                       'name':fullName,
                       'local': 'en_US',
-                      'permissions': 'read_friendlists, user_friends',
+                      'permissions': permissions,
                       'method':'post',
                       'access_token': APP_ID + "|" + CLIENT_SECRET})
-    url = "%s/%s/accounts"
-    #urllib2.urlopen(url % GRAPH_URL,
+    url = "%s/accounts/test-users"
+    urllib2.urlopen(url % GRAPH_URL, post_args)
+    print("createUser")
+
+#permissions: 'read_friendlists, user_friends'
+createUser("1", 'read_friendlists, user_friends')
